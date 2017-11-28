@@ -1,0 +1,137 @@
+<div class="container">
+    <div>
+        <div class="row col-md-6 col-sm-12 margin-bottom">
+            <div class="col-md-6 col-xs-12">
+                <img src="/assets/images/bitcoin.png" style="max-height: 150px; max-width: 150px"
+                     class="img-responsive center-block"
+                     alt="Responsive image">
+            </div>
+            <div class="col-md-6 col-xs-12 margin-bottom">
+                <h1 ng-class="{'text-success': btc.up, 'text-danger': btc.up == false}" class="text-center v-center">
+                    {{btc.amount | currency: '€'}}
+                </h1>
+            </div>
+            <div class="col-xs-12 margin-top">
+                <table class="table table-bordered">
+                    <tr>
+                        <th></th>
+                        <th>Old</th>
+                        <th>Current</th>
+                        <th>%</th>
+                    </tr>
+                    <tbody>
+                    <tr>
+                        <td>24h</td>
+                        <td>{{btc_24h.amount}}</td>
+                        <td>{{btc.amount}}</td>
+                        <span ng-hide="true">{{btc_24h_percentage = btc.amount / (btc_24h.amount / 100);}}</span>
+                        <td ng-class="{'text-success': btc_24h_percentage > 100, 'text-danger': btc_24h_percentage < 0}">{{(btc_24h_percentage - 100) | number: 2}}%</td>
+                    </tr>
+                    <tr>
+                        <td>7d</td>
+                        <td>{{btc_7d.amount}}</td>
+                        <td>{{btc.amount}}</td>
+                        <span ng-hide="true">{{btc_7d_percentage = btc.amount / (btc_7d.amount / 100);}}</span>
+                        <td ng-class="{'text-success': btc_7d_percentage > 100, 'text-danger': btc_7d_percentage < 0}" >{{(btc_7d_percentage - 100) | number: 2}}%</td>
+                    </tr>
+                    <tr>
+                        <td>1m</td>
+                        <td>{{btc_1m.amount}}</td>
+                        <td>{{btc.amount}}</td>
+                        <span ng-hide="true">{{btc_1m_percentage = btc.amount / (btc_1m.amount / 100);}}</span>
+                        <td ng-class="{'text-success': btc_1m_percentage > 100, 'text-danger': btc_1m_percentage < 0}" >{{(btc_1m_percentage - 100) | number: 2}}%</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row col-md-6 col-sm-12 margin-bottom">
+            <div class="col-sm-12 col-md-6">
+                <img src="/assets/images/ethereum.png" style="max-height: 150px; max-width: 150px"
+                     class="img-responsive center-block"
+                     alt="Responsive image">
+            </div>
+            <div class="col-sm-12 col-md-6 margin-bottom">
+                <h1 ng-class="{'text-success': eth.up, 'text-danger': eth.up == false}" class="text-center v-center">
+                    {{eth.amount | currency: '€'}}
+                </h1>
+            </div>
+            <div class="col-xs-12 margin-top">
+                <table class="table table-bordered">
+                    <tr>
+                        <th></th>
+                        <th>Old</th>
+                        <th>Current</th>
+                        <th>%</th>
+                    </tr>
+                    <tbody>
+                    <tr>
+                        <td>24h</td>
+                        <td>{{eth_24h.amount}}</td>
+                        <td>{{eth.amount}}</td>
+                        <span ng-hide="true">{{eth_24h_percentage = eth.amount / (eth_24h.amount / 100);}}</span>
+                        <td ng-class="{'text-success': eth_24h_percentage > 100, 'text-danger': eth_24h_percentage < 100}" >{{(eth_24h_percentage - 100) | number: 2}}%</td>
+                    </tr>
+                    <tr>
+                        <td>7d</td>
+                        <td>{{eth_7d.amount}}</td>
+                        <td>{{eth.amount}}</td>
+                        <span ng-hide="true">{{eth_7d_percentage = eth.amount / (eth_7d.amount / 100);}}</span>
+                        <td ng-class="{'text-success': eth_7d_percentage > 100, 'text-danger': eth_7d_percentage < 100}" >{{(eth_7d_percentage - 100) | number: 2}}%</td>
+                    </tr>
+                    <tr>
+                        <td>1m</td>
+                        <td>{{eth_1m.amount}}</td>
+                        <td>{{eth.amount}}</td>
+                        <span ng-hide="true">{{eth_1m_percentage = eth.amount / (eth_1m.amount / 100);}}</span>
+                        <td ng-class="{'text-success': eth_1m_percentage > 100, 'text-danger': eth_1m_percentage < 100}">{{(eth_1m_percentage - 100) | number: 2}}%</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="margin-top">
+        <table class="table table-bordered">
+            <tr>
+                <th>Name</th>
+                <th>Holding</th>
+                <th>Amount</th>
+                <th>Value</th>
+            </tr>
+            <tbody>
+            <tr>
+                <td>Roland</td>
+                <td>{{btc.base}}</td>
+                <td>0.11549</td>
+                <td>{{(0 * eth.amount) + (btc.amount * 0.11549)| currency: '€'}}</td>
+            </tr>
+            <tr>
+                <td>Jelle</td>
+                <td>{{eth.base}}</td>
+                <td>19,0091</td>
+                <td>{{(19.0091 * eth.amount) + (btc.amount * 0) | currency: '€'}}</td>
+            </tr>
+            <tr>
+                <td>Ellen</td>
+                <td>{{eth.base}}</td>
+                <td>0</td>
+                <td>{{(0 * eth.amount) | currency: '€'}}</td>
+            </tr>
+            <tr>
+                <td>Isah</td>
+                <td>{{eth.base}}</td>
+                <td>0</td>
+                <td>{{(0 * eth.amount) + (btc.amount * 0) | currency: '€'}}</td>
+            </tr>
+            <tr>
+                <td>Ole</td>
+                <td>{{eth.base}}</td>
+                <td>0</td>
+                <td>{{(0 * eth.amount) | currency: '€'}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

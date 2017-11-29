@@ -1,16 +1,17 @@
 <div class="container">
     <div>
         <div class="row col-md-6 col-sm-12 margin-bottom">
-            <div class="col-md-6 col-xs-12">
+            <div class="col-md-6 col-xs-12 pointer" ng-click="reload()">
                 <img src="/assets/images/bitcoin.png" style="max-height: 150px; max-width: 150px"
                      class="img-responsive center-block"
                      alt="Responsive image">
             </div>
-            <div class="col-md-6 col-xs-12 margin-bottom">
+            <div class="col-md-6 col-xs-12 pointer margin-bottom" ng-click="reload()">
                 <h1 ng-class="{'text-success': btc.up, 'text-danger': btc.up == false}" class="text-center v-center">
                     {{btc.amount | currency: '€'}}
                 </h1>
             </div>
+
             <div class="col-xs-12 margin-top">
                 <table class="table table-bordered">
                     <tr>
@@ -20,38 +21,23 @@
                         <th>%</th>
                     </tr>
                     <tbody>
-                    <tr>
-                        <td>24h</td>
-                        <td>{{btc_24h.amount}}</td>
+                    <tr ng-repeat="obj in btc_data | orderBy: 'order'">
+                        <td>{{obj.name}}</td>
+                        <td>{{obj.amount}}</td>
                         <td>{{btc.amount}}</td>
-                        <span ng-hide="true">{{btc_24h_percentage = btc.amount / (btc_24h.amount / 100);}}</span>
-                        <td ng-class="{'text-success': btc_24h_percentage > 100, 'text-danger': btc_24h_percentage < 0}">{{(btc_24h_percentage - 100) | number: 2}}%</td>
-                    </tr>
-                    <tr>
-                        <td>7d</td>
-                        <td>{{btc_7d.amount}}</td>
-                        <td>{{btc.amount}}</td>
-                        <span ng-hide="true">{{btc_7d_percentage = btc.amount / (btc_7d.amount / 100);}}</span>
-                        <td ng-class="{'text-success': btc_7d_percentage > 100, 'text-danger': btc_7d_percentage < 0}" >{{(btc_7d_percentage - 100) | number: 2}}%</td>
-                    </tr>
-                    <tr>
-                        <td>1m</td>
-                        <td>{{btc_1m.amount}}</td>
-                        <td>{{btc.amount}}</td>
-                        <span ng-hide="true">{{btc_1m_percentage = btc.amount / (btc_1m.amount / 100);}}</span>
-                        <td ng-class="{'text-success': btc_1m_percentage > 100, 'text-danger': btc_1m_percentage < 0}" >{{(btc_1m_percentage - 100) | number: 2}}%</td>
+                        <td ng-class="{'text-success': (btc.amount / (obj.amount / 100)) > 100, 'text-danger': (btc.amount / (obj.amount / 100)) < 100}">{{((btc.amount / (obj.amount / 100)) - 100) | number: 2}}%</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="row col-md-6 col-sm-12 margin-bottom">
-            <div class="col-sm-12 col-md-6">
+        <div class="row col-md-6 col-sm-12  margin-bottom" >
+            <div class="col-sm-12 col-md-6 pointer" ng-click="reload()">
                 <img src="/assets/images/ethereum.png" style="max-height: 150px; max-width: 150px"
                      class="img-responsive center-block"
                      alt="Responsive image">
             </div>
-            <div class="col-sm-12 col-md-6 margin-bottom">
+            <div class="col-sm-12 col-md-6 pointer margin-bottom" ng-click="reload()">
                 <h1 ng-class="{'text-success': eth.up, 'text-danger': eth.up == false}" class="text-center v-center">
                     {{eth.amount | currency: '€'}}
                 </h1>
@@ -65,26 +51,11 @@
                         <th>%</th>
                     </tr>
                     <tbody>
-                    <tr>
-                        <td>24h</td>
-                        <td>{{eth_24h.amount}}</td>
+                    <tr ng-repeat="obj in eth_data | orderBy: 'order'">
+                        <td>{{obj.name}}</td>
+                        <td>{{obj.amount}}</td>
                         <td>{{eth.amount}}</td>
-                        <span ng-hide="true">{{eth_24h_percentage = eth.amount / (eth_24h.amount / 100);}}</span>
-                        <td ng-class="{'text-success': eth_24h_percentage > 100, 'text-danger': eth_24h_percentage < 100}" >{{(eth_24h_percentage - 100) | number: 2}}%</td>
-                    </tr>
-                    <tr>
-                        <td>7d</td>
-                        <td>{{eth_7d.amount}}</td>
-                        <td>{{eth.amount}}</td>
-                        <span ng-hide="true">{{eth_7d_percentage = eth.amount / (eth_7d.amount / 100);}}</span>
-                        <td ng-class="{'text-success': eth_7d_percentage > 100, 'text-danger': eth_7d_percentage < 100}" >{{(eth_7d_percentage - 100) | number: 2}}%</td>
-                    </tr>
-                    <tr>
-                        <td>1m</td>
-                        <td>{{eth_1m.amount}}</td>
-                        <td>{{eth.amount}}</td>
-                        <span ng-hide="true">{{eth_1m_percentage = eth.amount / (eth_1m.amount / 100);}}</span>
-                        <td ng-class="{'text-success': eth_1m_percentage > 100, 'text-danger': eth_1m_percentage < 100}">{{(eth_1m_percentage - 100) | number: 2}}%</td>
+                        <td ng-class="{'text-success': (eth.amount / (obj.amount / 100)) > 100, 'text-danger': (eth.amount / (obj.amount / 100)) < 100}">{{((eth.amount / (obj.amount / 100)) - 100) | number: 2}}%</td>
                     </tr>
                     </tbody>
                 </table>

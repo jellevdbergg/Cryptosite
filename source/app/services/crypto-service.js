@@ -3,7 +3,7 @@
  * off of the services module.
  */
 angular.module('services').factory('CryptoService', ['$http', '$q', function ($http, $q) {
-
+var cc = 'https://min-api.cryptocompare.com/data/';
     return {
 
         btc: function () {
@@ -126,6 +126,40 @@ angular.module('services').factory('CryptoService', ['$http', '$q', function ($h
                 deferred.reject("not found");
             });
             return deferred.promise;
+        },
+
+        eth_short: function () {
+            var eth_short = [];
+            $http.get(cc + 'histohour', {params: {fsym: 'ETH', tsym: 'EUR'}}).then(function(data) {
+                var result = data.data.Data;
+                // console.log('result', new Date(result[0].time));
+                // console.log('result', new Date(result[168].time * 1000));
+                eth_short.push(eth_7d = {'amount': result[0].close, 'name': '7d', 'order': 8});
+                eth_short.push(eth_3d = {'amount': result[72].close, 'name': '3d', 'order': 7});
+                eth_short.push(eth_1d = {'amount': result[144].close, 'name': '1d', 'order': 6});
+                eth_short.push(eth_12h = {'amount': result[166].close, 'name': '12h','order': 5});
+                eth_short.push(eth_6h = {'amount': result[162].close, 'name': '6h','order': 4});
+                eth_short.push(eth_3h = {'amount': result[166].close, 'name': '3h', 'order': 3});
+                eth_short.push(eth_2h = {'amount': result[167].close, 'name': '2h', 'order': 2});
+                eth_short.push(eth_1h = {'amount': result[168].close, 'name': '1h', 'order': 1});
+            });
+            return eth_short;
+        },
+        btc_short: function () {
+            var btc_short = [];
+            $http.get(cc + 'histohour', {params: {fsym: 'BTC', tsym: 'EUR'}}).then(function(data){
+                var result = data.data.Data;
+                // console.log('result', new Date(result[168].time * 1000));
+                btc_short.push(btc_7d = {'amount': result[0].close, 'name': '7d', 'order': 8});
+                btc_short.push(btc_3d = {'amount': result[72].close, 'name': '3d','order': 7});
+                btc_short.push(btc_1d = {'amount': result[144].close, 'name': '1d', 'order': 6});
+                btc_short.push(btc_12h = {'amount': result[166].close, 'name': '12h', 'order': 5});
+                btc_short.push(btc_6h = {'amount': result[162].close, 'name': '6h', 'order': 4});
+                btc_short.push(btc_3h = {'amount': result[166].close, 'name': '3h', 'order': 3});
+                btc_short.push(btc_2h = {'amount': result[167].close, 'name': '2h', 'order': 2});
+                btc_short.push(btc_1h = {'amount': result[168].close, 'name': '1h', 'order': 1});
+            });
+            return btc_short;
         }
 
     };

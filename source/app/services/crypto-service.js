@@ -35,6 +35,34 @@ var cc = 'https://min-api.cryptocompare.com/data/';
 
             return deferred.promise;
         },
+
+        xrp: function () {
+            var deferred = $q.defer();
+            $http.get(cc + 'price', {params: {fsym: 'XRP', tsyms: 'EUR'}}).success(function (data) {
+
+                deferred.resolve(data);
+
+            }).error(function () {
+
+                deferred.reject("not found");
+            });
+
+            return deferred.promise;
+        },
+
+        iota: function () {
+            var deferred = $q.defer();
+            $http.get(cc + 'price', {params: {fsym: 'IOTA', tsyms: 'EUR'}}).success(function (data) {
+
+                deferred.resolve(data);
+
+            }).error(function () {
+
+                deferred.reject("not found");
+            });
+
+            return deferred.promise;
+        },
          eth_1m: function () {
             var deferred = $q.defer();
             var curr = new Date(); // get current date

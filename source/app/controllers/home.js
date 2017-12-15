@@ -25,6 +25,8 @@ angular.module('controllers').controller('HomeController', ['$scope', 'CryptoSer
     function reload() {
         var oldEthAmount = $scope.eth ? $scope.eth.amount : null;
         var oldBTCAmount = $scope.btc ? $scope.btc.amount : null;
+        var oldXRPAmount = $scope.xrp ? $scope.xrp.amount : null;
+        var oldIOTAAmount = $scope.iota ? $scope.iota.amount : null;
         CryptoService.eth().then(function (data) {
             $scope.eth = data.data;
 
@@ -43,6 +45,30 @@ angular.module('controllers').controller('HomeController', ['$scope', 'CryptoSer
             }
             else if (oldBTCAmount !== null && data.data.amount < oldBTCAmount) {
                 $scope.btc.up = false;
+            }
+        });
+
+        CryptoService.xrp().then(function (data) {
+            console.log('xrp', data);
+            $scope.xrp = {};
+            $scope.xrp.amount = data.EUR;
+            if (oldXRPAmount !== null && $scope.xrp.amount > oldXRPAmount) {
+                $scope.xrp.up = true;
+            }
+            else if (oldXRPAmount !== null && $scope.xrp.amount < oldXRPAmount) {
+                $scope.xrp.up = false;
+            }
+        });
+
+        CryptoService.iota().then(function (data) {
+            console.log('iota', data);
+            $scope.iota = {};
+            $scope.iota.amount = data.EUR;
+            if (oldIOTAAmount !== null && $scope.iota.amount > oldIOTAAmount) {
+                $scope.iota.up = true;
+            }
+            else if (oldIOTAAmount !== null && $scope.iota.amount < oldIOTAAmount) {
+                $scope.iota.up = false;
             }
         });
 

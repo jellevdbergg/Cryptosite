@@ -11,25 +11,6 @@
                     {{btc.amount | currency: '€'}}
                 </h1>
             </div>
-
-            <div class="col-xs-12 margin-top">
-                <table class="table table-bordered">
-                    <tr>
-                        <th></th>
-                        <th>Old</th>
-                        <th>Current</th>
-                        <th>%</th>
-                    </tr>
-                    <tbody>
-                    <tr ng-repeat="obj in btc_data | orderBy: 'order'">
-                        <td>{{obj.name}}</td>
-                        <td>{{obj.amount}}</td>
-                        <td>{{btc.amount}}</td>
-                        <td ng-class="{'text-success': (btc.amount / (obj.amount / 100)) > 100, 'text-danger': (btc.amount / (obj.amount / 100)) < 100}">{{((btc.amount / (obj.amount / 100)) - 100) | number: 2}}%</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
         </div>
         <div class="row col-md-6 col-sm-12  margin-bottom" >
             <div class="col-sm-12 col-md-6 pointer" ng-click="reload()">
@@ -42,23 +23,32 @@
                     {{eth.amount | currency: '€'}}
                 </h1>
             </div>
-            <div class="col-xs-12 margin-top">
-                <table class="table table-bordered">
-                    <tr>
-                        <th></th>
-                        <th>Old</th>
-                        <th>Current</th>
-                        <th>%</th>
-                    </tr>
-                    <tbody>
-                    <tr ng-repeat="obj in eth_data | orderBy: 'order'">
-                        <td>{{obj.name}}</td>
-                        <td>{{obj.amount}}</td>
-                        <td>{{eth.amount}}</td>
-                        <td ng-class="{'text-success': (eth.amount / (obj.amount / 100)) > 100, 'text-danger': (eth.amount / (obj.amount / 100)) < 100}">{{((eth.amount / (obj.amount / 100)) - 100) | number: 2}}%</td>
-                    </tr>
-                    </tbody>
-                </table>
+        </div>
+    </div>
+
+    <div>
+        <div class="row col-md-6 col-sm-12 margin-bottom">
+            <div class="col-md-6 col-xs-12 pointer" ng-click="reload()">
+                <img src="/assets/images/ripple.png" style="max-height: 150px; max-width: 150px"
+                     class="img-responsive center-block"
+                     alt="Responsive image">
+            </div>
+            <div class="col-md-6 col-xs-12 pointer margin-bottom" ng-click="reload()">
+                <h1 ng-class="{'text-success': xrp.up, 'text-danger': xrp.up == false}" class="text-center v-center">
+                    {{xrp.amount | currency: '€'}}
+                </h1>
+            </div>
+        </div>
+        <div class="row col-md-6 col-sm-12  margin-bottom" >
+            <div class="col-sm-12 col-md-6 pointer" ng-click="reload()">
+                <img src="/assets/images/iota.png" style="max-height: 150px; max-width: 150px"
+                     class="img-responsive center-block"
+                     alt="Responsive image">
+            </div>
+            <div class="col-sm-12 col-md-6 pointer margin-bottom" ng-click="reload()">
+                <h1 ng-class="{'text-success': iota.up, 'text-danger': iota.up == false}" class="text-center v-center">
+                    {{iota.amount | currency: '€'}}
+                </h1>
             </div>
         </div>
     </div>
@@ -70,37 +60,85 @@
                 <th>Holding</th>
                 <th>Amount</th>
                 <th>Value</th>
+                <th>Profit</th>
             </tr>
             <tbody>
             <tr>
                 <td>Roland</td>
-                <td>{{btc.base}}</td>
+                <td>BTC</td>
                 <td>0.11549</td>
-                <td>{{(0 * eth.amount) + (btc.amount * 0.11549)| currency: '€'}}</td>
+                <td>{{btc.amount * 0.11549| currency: '€'}}</td>
+                <td ng-class="{'text-success': btc.amount * 0.11549 > 300, 'text-danger': btc.amount * 0.11549 < 300}">{{(btc.amount * 0.11549 / (300/100)) -100 | number: 2}}%</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>XRP</td>
+                <td>835</td>
+                <td>{{xrp.amount * 835| currency: '€'}}</td>
+                <td ng-class="{'text-success': xrp.amount * 835 > 500, 'text-danger': xrp.amount * 835 < 500}">{{(xrp.amount * 835 / (500/100)) -100 | number: 2}}%</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>IOTA</td>
+                <td>174,5</td>
+                <td>{{iota.amount * 174.5| currency: '€'}}</td>
+                <td ng-class="{'text-success': iota.amount * 174.5 > 500, 'text-danger': iota.amount * 174.5 < 500}">{{(iota.amount * 174.5 / (500/100)) -100 | number: 2}}%</td>
             </tr>
             <tr>
                 <td>Jelle</td>
-                <td>{{eth.base}}</td>
+                <td>ETH</td>
                 <td>19,0091</td>
-                <td>{{(19.0091 * eth.amount) + (btc.amount * 0) | currency: '€'}}</td>
+                <td>{{(19.0091 * eth.amount) | currency: '€'}}</td>
+                <td ng-class="{'text-success': 19.0091* eth.amount > 5000, 'text-danger': 19.0091 * eth.amount < 50}">{{((19.0091 * eth.amount) / (5000/100)) -100 | number: 2}}%</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>XRP</td>
+                <td>835</td>
+                <td>{{xrp.amount * 835| currency: '€'}}</td>
+                <td ng-class="{'text-success': xrp.amount * 835 > 500, 'text-danger': xrp.amount * 835 < 500}">{{(xrp.amount * 835 / (500/100)) -100 | number: 2}}%</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>IOTA</td>
+                <td>174,5</td>
+                <td>{{iota.amount * 174.5| currency: '€'}}</td>
+                <td ng-class="{'text-success': iota.amount * 174.5 > 500, 'text-danger': iota.amount * 174.5 < 500}">{{(iota.amount * 174.5 / (500/100)) -100 | number: 2}}%</td>
             </tr>
             <tr>
                 <td>Ellen</td>
-                <td>{{eth.base}}</td>
+                <td>ETH</td>
                 <td>2.55381</td>
                 <td>{{(2.55381 * eth.amount) | currency: '€'}}</td>
+                <td ng-class="{'text-success': 2.55381 * eth.amount > 1000, 'text-danger': 2.55381 * eth.amount < 1000}">{{((2.55381 * eth.amount) / (1000/100)) -100| number: 2}}%</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>XRP</td>
+                <td>835</td>
+                <td>{{xrp.amount * 835| currency: '€'}}</td>
+                <td ng-class="{'text-success': xrp.amount * 835 > 500, 'text-danger': xrp.amount * 835 < 500}">{{(xrp.amount * 835 / (500/100)) -100 | number: 2}}%</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>IOTA</td>
+                <td>174,5</td>
+                <td>{{iota.amount * 174.5| currency: '€'}}</td>
+                <td ng-class="{'text-success': iota.amount * 174.5 > 500, 'text-danger': iota.amount * 174.5 < 500}">{{(iota.amount * 174.5 / (500/100)) -100 | number: 2}}%</td>
             </tr>
             <tr>
                 <td>Isah</td>
-                <td>{{eth.base}}</td>
+                <td>ETH</td>
                 <td>0.12769</td>
                 <td>{{(0.12769 * eth.amount) | currency: '€'}}</td>
+                <td ng-class="{'text-success': 0.12769 * eth.amount > 50, 'text-danger': 0.12769 * eth.amount < 50}">{{((0.12769 * eth.amount) / (50/100)) -100| number: 2}}%</td>
             </tr>
             <tr>
                 <td>Ole</td>
-                <td>{{eth.base}}</td>
+                <td>ETH</td>
                 <td>0.12769</td>
                 <td>{{(0.12769 * eth.amount) | currency: '€'}}</td>
+                <td ng-class="{'text-success': 0.12769 * eth.amount > 50, 'text-danger': 0.12769 * eth.amount < 50}">{{((0.12769 * eth.amount) / (50/100)) -100 | number: 2}}%</td>
             </tr>
             </tbody>
         </table>

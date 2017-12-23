@@ -11,7 +11,7 @@ angular.module('controllers').controller('HomeController', ['$scope', 'CryptoSer
     init();
 
     function init() {
-        if (!localStorage.getItem("login")) {
+        if (!sessionStorage.getItem("login")) {
             $location.path("/");
         }
 
@@ -61,9 +61,9 @@ angular.module('controllers').controller('HomeController', ['$scope', 'CryptoSer
         });
 
         CryptoService.iota().then(function (data) {
-            console.log('iota', data);
+            console.log('iota', data[6]);
             $scope.iota = {};
-            $scope.iota.amount = data.EUR;
+            $scope.iota.amount = (data[6] * $scope.btc.amount);
             if (oldIOTAAmount !== null && $scope.iota.amount > oldIOTAAmount) {
                 $scope.iota.up = true;
             }

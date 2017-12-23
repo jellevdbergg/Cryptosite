@@ -35,7 +35,7 @@
             </div>
             <div class="col-md-6 col-xs-12 pointer margin-bottom" ng-click="reload()">
                 <h1 ng-class="{'text-success': xrp.up, 'text-danger': xrp.up == false}" class="text-center v-center">
-                    {{xrp.amount | currency: '€'}}
+                    {{xrp.amount | currency: '€' : 4}}
                 </h1>
             </div>
         </div>
@@ -47,7 +47,7 @@
             </div>
             <div class="col-sm-12 col-md-6 pointer margin-bottom" ng-click="reload()">
                 <h1 ng-class="{'text-success': iota.up, 'text-danger': iota.up == false}" class="text-center v-center">
-                    {{iota.amount | currency: '€'}}
+                    {{iota.amount | currency: '€' : 4}}
                 </h1>
             </div>
         </div>
@@ -86,17 +86,10 @@
             </tr>
             <tr>
                 <td>Jelle</td>
-                <td>ETH</td>
-                <td>19,0091</td>
-                <td>{{(19.0091 * eth.amount) | currency: '€'}}</td>
-                <td ng-class="{'text-success': 19.0091* eth.amount > 5000, 'text-danger': 19.0091 * eth.amount < 50}">{{((19.0091 * eth.amount) / (5000/100)) -100 | number: 2}}%</td>
-            </tr>
-            <tr>
-                <td></td>
                 <td>XRP</td>
-                <td>835</td>
-                <td>{{xrp.amount * 835| currency: '€'}}</td>
-                <td ng-class="{'text-success': xrp.amount * 835 > 500, 'text-danger': xrp.amount * 835 < 500}">{{(xrp.amount * 835 / (500/100)) -100 | number: 2}}%</td>
+                <td>6582,34</td>
+                <td>{{xrp.amount * 6582.34| currency: '€'}}</td>
+                <td ng-class="{'text-success': xrp.amount * 6582.34 > 5000, 'text-danger': xrp.amount * 6582.34 < 5000}">{{(xrp.amount * 6582.34 / (5000/100)) -100 | number: 2}}%</td>
             </tr>
             <tr>
                 <td></td>

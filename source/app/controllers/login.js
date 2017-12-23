@@ -9,7 +9,7 @@ angular.module('controllers').controller('LoginController', ['$scope', '$locatio
         if (passwd === "supersecret") {
             $location.path("/home");
             $scope.invalidPasswd = false;
-            localStorage.setItem("login", true);
+            sessionStorage.setItem("login", true);
         }
         else{
             $scope.invalidPasswd = true;

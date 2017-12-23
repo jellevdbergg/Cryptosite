@@ -4,6 +4,7 @@
  */
 angular.module('services').factory('CryptoService', ['$http', '$q', function ($http, $q) {
 var cc = 'https://min-api.cryptocompare.com/data/';
+var bitfinex = 'https://api.bitfinex.com/v2/';
     return {
 
         btc: function () {
@@ -52,8 +53,7 @@ var cc = 'https://min-api.cryptocompare.com/data/';
 
         iota: function () {
             var deferred = $q.defer();
-            $http.get(cc + 'price', {params: {fsym: 'IOTA', tsyms: 'EUR'}}).success(function (data) {
-
+            $http.get(bitfinex + 'ticker/tIOTBTC').success(function (data) {
                 deferred.resolve(data);
 
             }).error(function () {
